@@ -1,0 +1,29 @@
+CREATE OR REPLACE EXTERNAL TABLE `kestra-486406.raw.fhv_ext`
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://dezoomcamp_hw4_2026_dplayergod/nyc_taxi/fhv/fhv_tripdata_2019-*.csv.gz']
+);
+
+
+SELECT COUNT(*) FROM `kestra-486406.raw.fct_monthly_zone_revenue`;
+
+SELECT
+    pickup_zone,
+    SUM(revenue_monthly_total_amount) AS revenue 
+FROM `kestra-486406.raw.fct_monthly_zone_revenue`
+WHERE service_type = 'Green'
+  AND EXTRACT(YEAR FROM DATE(revenue_month)) = 2020
+GROUP BY pickup_zone
+ORDER BY revenue DESC
+LIMIT 1;
+
+
+SELECT
+    SUM(total_monthly_trips) AS total
+FROM `kestra-486406.raw.fct_monthly_zone_revenue`
+WHERE service_type = 'Green'
+  AND EXTRACT(YEAR FROM DATE(revenue_month)) = 2019
+  AND EXTRACT(MONTH FROM DATE(revenue_month)) = 10;
+
+create a profiles.yml at ~/.dbt/profiles.yml to declare dbt project
+
