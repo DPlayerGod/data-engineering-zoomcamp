@@ -1,0 +1,2 @@
+# Import all flows: assuming username admin@kestra.io and password Admin1234 (adjust to match your username and password)
+curl -X POST -u 'admin@kestra.io:Admin1234' http://localhost:8080/api/v1/flows/import -F fileUpload=@flows/01_hello_world.yaml
