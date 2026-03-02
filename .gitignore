@@ -5,5 +5,7 @@
 .idea
 kestra-486404-c5877e8c6618.json
 .venv/
+venv/
 logs/
 note.txt
+get-pip.py
